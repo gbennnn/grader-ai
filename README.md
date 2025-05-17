@@ -1,6 +1,6 @@
-# Smart PDF Grader
+# Grader AI
 
-Smart PDF Grader is an AI-powered web-based system designed to automatically evaluate student assignment PDF files. This tool helps educators and teaching assistants to efficiently assess, score, and provide feedback based on customizable grading parameters.
+**Grader-AI** is an AI-powered web-based system designed to automatically evaluate student assignment PDF files. This tool helps educators and teaching assistants to efficiently assess, score, and provide feedback based on customizable grading parameters.
 
 ## 🚀 Features
 
@@ -12,12 +12,10 @@ Smart PDF Grader is an AI-powered web-based system designed to automatically eva
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React.js / Next.js
-- **Backend**: Python (Flask / FastAPI) or Node.js
-- **AI/NLP**: OpenAI API (GPT), spaCy, HuggingFace Transformers
-- **PDF Extraction**: PyMuPDF, pdfplumber, Tesseract (OCR)
-- **Database**: PostgreSQL / MongoDB
-- **Deployment**: Vercel / Render / Heroku
+- **Frontend**: HTML, Tailwind CSS
+- **Backend**: Python (Flask / FastAPI)
+- **AI/NLP**: OpenAI API (GPT)
+- **PDF Extraction**: PyMuPDF
 
 ## 📚 Use Case
 
@@ -27,13 +25,13 @@ Initially built to solve the real-world problem of grading 40+ student reports m
 
 ```bash
 # clone the repository
-git clone https://github.com/iambeno1/smart-pdf-grader.git
-cd smart-pdf-grader
+git clone https://github.com/gbennnn/grader-ai.git
+cd grader-ai
 
 # install backend dependencies
-cd backend
 pip install -r requirements.txt
 
-# install frontend dependencies
-cd ../frontend
-npm install
+# run the application
+# make sure to set the OPENAI_API_KEY environment variable
+python app.py
+```
