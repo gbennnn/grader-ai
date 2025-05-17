@@ -4,7 +4,7 @@
 
 ## 🚀 Features
 
-- 📄 Upload and process multiple student PDFs
+- 📄 Upload and Extract pdf file to text
 - 🤖 AI analysis of writing structure, relevance, grammar, and references
 - 📊 Customizable grading rubrics
 - ✍️ Automatic feedback generation
