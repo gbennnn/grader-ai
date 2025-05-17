@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Essay Grader AI</title>
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+    <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
+      <h1 class="text-2xl font-bold mb-4">Upload Tugas PDF Mahasiswa</h1>
+
+      <form
+        method="POST"
+        action="{{ url_for('main.upload_file') }}"
+        enctype="multipart/form-data"
+        class="space-y-4"
+      >
+        <input
+          type="file"
+          name="file"
+          accept=".pdf"
+          class="block w-full text-sm text-gray-700"
+          required
+        />
+
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Submit & Analisis
+        </button>
+      </form>
+
+      {% if text %}
+      <div class="mt-6">
+        <h2 class="text-lg font-semibold">Hasil Ekstrak Teks (Potongan):</h2>
+        <pre
+          class="mt-2 p-2 bg-gray-50 border rounded overflow-x-auto whitespace-pre-wrap text-sm"
+        >
+{{ text }}</pre
+        >
+      </div>
+      {% endif %} {% if feedback_table %}
+      <div class="mt-6">
+        <h2 class="text-lg font-semibold mb-2">Hasil Penilaian:</h2>
+        <div class="overflow-x-auto">
+          <table
+            class="w-full table-auto border-collapse border border-gray-300 text-sm"
+          >
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="border border-gray-300 px-4 py-2 text-left">
+                  Aspek
+                </th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Skor</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">
+                  Komentar
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in feedback_table %}
+              <tr class="hover:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">
+                  {{ row.aspek }}
+                </td>
+                <td class="border border-gray-300 px-4 py-2">{{ row.skor }}</td>
+                <td class="border border-gray-300 px-4 py-2">
+                  {{ row.komentar }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% if total_score %}
+          <h3>Total Skor: {{ total_score }}</h3>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
