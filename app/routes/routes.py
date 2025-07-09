@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 from app.utils.pdf_utils import extract_text_from_pdf
 from openai import OpenAI
 from dotenv import load_dotenv
+from datetime import datetime
 
 # Load API key dari .env
 load_dotenv()
@@ -14,11 +15,14 @@ main = Blueprint("main", __name__)
 
 @main.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    return render_template("index.html", current_year=datetime.now().year)
 
 
 @main.route("/upload", methods=["POST"])
 def upload_file():
+    if "clear" in request.form:
+        # Render ulang tanpa hasil
+        return render_template("index.html", current_year=datetime.now().year)
     if "file" not in request.files:
         return "No file part", 400
 
@@ -65,6 +69,7 @@ def upload_file():
         text=extracted_text,
         feedback_table=feedback_table,
         total_score=total_score,
+        current_year=datetime.now().year,
     )
 
 
@@ -80,11 +85,11 @@ Tugas kamu adalah menjadi penilai esai mahasiswa berdasarkan rubrik di bawah ini
 
 Format jawaban kamu adalah sebagai berikut:
 
-Struktur Tulisan|Skor|Komentar
-Kejelasan Argumen|Skor|Komentar
-Tata Bahasa|Skor|Komentar
-Ketepatan Konten|Skor|Komentar
-Kreativitas/Gaya|Skor|Komentar
+Struktur Tulisan|Skor/25|Komentar
+Kejelasan Argumen|Skor/25|Komentar
+Tata Bahasa|Skor/20|Komentar
+Ketepatan Konten|Skor/20|Komentar
+Kreativitas/Gaya|Skor/10|Komentar
 
 Total Skor: xx/100
 
@@ -94,7 +99,7 @@ Berikut teks esainya:
 """
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",  # atau gpt-4 jika kamu punya akses
+        model="gpt-4.1",  # atau gpt-4 jika kamu punya akses
         messages=[
             {
                 "role": "system",
@@ -102,7 +107,7 @@ Berikut teks esainya:
             },
             {"role": "user", "content": prompt},
         ],
-        temperature=0.5,
+        temperature=0.0,
         max_tokens=500,
     )
 

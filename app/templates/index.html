@@ -33,13 +33,22 @@
         >
           Submit & Analisis
         </button>
+        <button
+          type="submit"
+          name="clear"
+          value="1"
+          class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 ml-2"
+        >
+          Bersihkan
+        </button>
       </form>
 
       {% if text %}
       <div class="mt-6">
-        <h2 class="text-lg font-semibold">Hasil Ekstrak Teks (Potongan):</h2>
+        <h2 class="text-lg font-semibold">Hasil Ekstrak Teks:</h2>
         <pre
           class="mt-2 p-2 bg-gray-50 border rounded overflow-x-auto whitespace-pre-wrap text-sm"
+          style="max-height: 300px; min-height: 150px; overflow-y: auto"
         >
 {{ text }}</pre
         >
@@ -83,5 +92,8 @@
       </div>
       {% endif %}
     </div>
+    <footer class="text-center text-xs text-gray-500 mt-8 mb-4">
+      &copy; {{ current_year }} Grader AI. All rights reserved.
+    </footer>
   </body>
 </html>
